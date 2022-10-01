@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator')
 const MailService =require('../services/mailService')
 
-const apiURL = process.env.NODE_ENV === 'development' ? process.env.DEV_API_URL : process.env.PRO_API_URL
-const clientURL = process.env.NODE_ENV === 'development' ? process.env.DEV_CLIENT_URL : process.env.PRO_CLIENT_URL
+const apiURL = process.env.NODE_ENV === 'dev' ? process.env.DEV_API_URL : process.env.PRO_API_URL
+const clientURL = process.env.NODE_ENV === 'dev' ? process.env.DEV_CLIENT_URL : process.env.PRO_CLIENT_URL
 
 const generateAccessToken = (id) => {
     const secret = process.env.JWT_ACCESS_SECRET
@@ -36,7 +36,7 @@ class userController {
             const activationLink = uuid.v4();
             const user = await new User({username,password:hashPassword,activationLink,email,isActivated:false})
             await user.save()
-            await MailService.sendActivationMail(email,`${apiURL}/activate/${activationLink}`);
+            await MailService.sendActivationMail(email,{link:`${apiURL}/activate/${activationLink}`,username,email,password});
             return res.json({message: "User successfully registered"})
         } catch (e) {
             console.log(e)

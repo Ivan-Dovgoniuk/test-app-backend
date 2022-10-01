@@ -12,8 +12,7 @@ app.use(express.json())
 
 app.use(cors({ 
     credentials: true,
-    origin: process.env.NODE_ENV === 'development' ? process.env.DEV_CLIENT_URL : process.env.PRO_CLIENT_URL}))
-
+    origin: process.env.NODE_ENV === 'dev' ? process.env.DEV_CLIENT_URL : process.env.PRO_CLIENT_URL}))
 
 app.use(express.static(__dirname))
 app.use(express.static(path.resolve(__dirname,'public')))
