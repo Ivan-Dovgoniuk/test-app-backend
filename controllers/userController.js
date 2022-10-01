@@ -18,6 +18,7 @@ const generateAccessToken = (id) => {
 
 class userController {
     async registration(req, res) {
+        console.log(req.body)
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
