@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 
+const clientURL = process.env.NODE_ENV === 'development' ? process.env.DEV_CLIENT_URL : process.env.PRO_CLIENT_URL
+
 module.exports = function (req, res, next) {
     if (req.method === "OPTIONS") {
         next()
