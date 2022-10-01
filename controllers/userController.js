@@ -130,7 +130,7 @@ class userController {
                 return res.status(400).json({message: "This username alredy exists"})
             }
             const user = await User.findOne({_id:userID})
-            if(newPassword & newPassword.length !=0){
+            if(newPassword.length !==0){
                 const hashPassword = bcrypt.hashSync(newPassword, 7);
                 user.password=hashPassword
             }
