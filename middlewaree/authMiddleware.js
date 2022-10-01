@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
         const token = req.headers.authorization.split(' ')[1]
         if (!token) {
             // return res.status(403).json({message: "User is not authorized"})
-            return res.redirect(`${clientURL}/login`).json({message: "User is not authorized"});
+            return res.redirect(`${clientURL}/login`)
 
         }
         const userID = jwt.verify(token, secret)
